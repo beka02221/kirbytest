@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Token Info</title>
+    <style>
+         .container {
+            text-align: center;
+            padding: 20px;
+            animation: fadeIn 1.5s ease;
+        }
+         .header {
+            margin-top: 70px;
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            animation: fadeInDown 2s ease;
+        }
+
+        body {
+            background-color: #D7A9F3;
+            color: #2E3192;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding-bottom: 80px; /* Space for bottom navigation */
+            scroll-behavior: smooth; /* Added for smooth scrolling */
+            position: relative; /* To ensure positioning of the button */
+        }
+        /* Контейнер для виджета */
+        #dexscreener-embed {
+            position: relative;
+          
+            width: 90%;
+            padding-bottom: 125%; /* Соотношение сторон 4:3 для мобильных */
+        }
+
+        /* Для экранов более 1400px, уменьшаем padding */
+        @media (min-width: 1400px) {
+            #dexscreener-embed {
+                padding-bottom: 65%; /* Соотношение сторон для больших экранов */
+            }
+        }
+
+        /* Стили для iframe */
+        #dexscreener-embed iframe {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            border: 0;
+        }
+
+        /* Стили для кнопки */
+        .floating-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #2E3192;
+            color: #fff;
+            padding: 15px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .floating-button:hover {
+            background-color: #4C3F99;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="header-icons">
+        <div>
+            <img src="kirby.PNG" alt="$Kirby Icon" style="width: 100px; height: 100px; cursor: pointer;" onclick="location.reload()">
+            <span style="cursor: pointer;" onclick="location.reload()"></span>
+        </div>
+        
+    </div>
+
+    <!-- Встраиваемый виджет -->
+    <div id="dexscreener-embed">
+        <iframe 
+            src="https://dexscreener.com/ton/EQC1EseNAHb881S6ngwzTOU4qlmuIY872_ig1VpB5MA6DOQz?embed=1&theme=dark&trades=0" 
+            frameborder="0" 
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <!-- Кнопка для перехода на index.html -->
+    <button class="floating-button" onclick="window.location.href='index.html'">
+        Go to Homepage
+    </button>
+
+</body>
+</html>

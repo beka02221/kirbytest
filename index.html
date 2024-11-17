@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KIRBY Meme Coin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #D7A9F3;
+            color: #2E3192;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding-bottom: 80px; /* Space for bottom navigation */
+            scroll-behavior: smooth; /* Added for smooth scrolling */
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .header {
+            margin-top: 70px;
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            animation: fadeInDown 2s ease;
+        }
+
+        .description {
+            margin-top: 30px;
+            background-color: #B290FF;
+            color: #FFFFFF;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            animation: fadeInUp 1.5s ease;
+        }
+        .about-content {
+    margin-bottom: 20px; /* Задаёт расстояние между абзацами */
+}
+
+
+        .kirby-image {
+            width: 100%; /* Default width of the image will be 100% */
+            max-width: 80%;
+            height: auto;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        @media (min-width: 768px) {
+            .kirby-image {
+                width: 50%; /* Reduces the image size by half on PC */
+                max-width: 40%; /* Limits maximum width */
+                margin-bottom: 20px;
+            }
+        }
+
+        .buy-button {
+            display: block;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #f542a4;
+            padding: 10px 15px; /* Reduced side padding */
+            border-radius: 5px;
+            font-weight: bold;
+            animation: fadeIn 2s ease;
+            margin-bottom: 100px;
+        }
+
+        .buy-button:hover {
+            background-color: #A075E7;
+        }
+
+
+        .about-section1 {
+            
+           background-color: #7D9FFF;
+            color: #FFFFFF;
+            padding: 20px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            margin-top: -70px;
+            text-align: left;
+        
+        }
+
+        .about-header1  {
+            
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .about-section, .checklist-section, .roadmap-section, .community-section {
+            background-color: #7D9FFF;
+            color: #FFFFFF;
+            padding: 20px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            margin-top: 50px;
+            text-align: left;
+        }
+
+        .about-header, .checklist-header, .roadmap-header, .community-header {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .checklist-content {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .check-icon {
+            color: #2E3192;
+            font-size: 1.2em;
+        }
+
+        .roadmap-item {
+            margin: 20px 0;
+            position: relative;
+            padding-left: 30px;
+            border-left: 2px solid #2E3192;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .roadmap-item h4 {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2E3192;
+        }
+
+        .roadmap-item p {
+            color: #FFFFFF;
+            line-height: 1.5;
+        }
+
+        .roadmap-item.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #A075E7;
+            padding: 10px 0;
+        }
+
+        .nav-item {
+            text-align: center;
+            color: #FFFFFF;
+            font-size: 0.9em;
+            text-decoration: none;
+        }
+
+        .nav-item img {
+            width: 24px;
+            height: 24px;
+            display: block;
+            margin: 0 auto 5px;
+        }
+
+        /* Community Section Styles */
+        .community-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .community-section.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .community-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .community-icon {
+            width: 40px;
+            height: 40px;
+        }
+
+        /* Header Styles */
+        .header-icons {
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            align-items: center;
+        }
+
+        .language-button {
+            background-color: #A075E7;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-icons">
+        <div>
+            <img src="kirby.PNG" alt="$Kirby Icon" style="width: 50px; height: 50px; cursor: pointer;" onclick="location.reload()">
+            <span style="cursor: pointer;" onclick="location.reload()"></span>
+        </div>
+        <button class="language-button" id="languageToggle">English</button>
+    </div>
+
+    <div class="container">
+        <div class="header">$KIRBY MEME COIN</div>
+        <p class="description">Legendary Kirby on Ton Blockchain!</p>
+        <img src="kirby.PNG" alt="Kirby" class="kirby-image">
+        <a href="https://app.ston.fi/swap?chartVisible=false&chartInterval=1w&ft=TON&tt=EQBfXRfeutTL-mcVJD4tQfRWC1AHRj9QRJCliZE_62n_8WJj" class="buy-button" id="buyLink">Buy $Kirby</a>
+    </div>
+
+
+
+  
+    <div class="about-section1">
+        <div class="about-header1">Contract Address:</div>
+        <p class="about-content1" id="contractAddress" onclick="copyToClipboard()">
+            EQBfXRfeutTL-mcVJD4tQfRWC1AHRj9QRJCliZE_62n_8WJj
+        </p>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            // Находим текст элемента с контрактом
+            const contractText = document.getElementById("contractAddress").innerText;
+            
+            // Создаем временный элемент для копирования текста
+            const tempInput = document.createElement("input");
+            tempInput.value = contractText;
+            document.body.appendChild(tempInput);
+            
+            // Копируем текст в буфер обмена
+            tempInput.select();
+            tempInput.setSelectionRange(0, 99999); // Для мобильных устройств
+            document.execCommand("copy");
+            
+            // Удаляем временный элемент после копирования
+            document.body.removeChild(tempInput);
+            
+            // Уведомление об успешном копировании
+            alert("Контракт скопирован в буфер обмена!");
+        }
+    </script>
+    
+
+
+
+    <!-- About Section -->
+    <div class="about-section">
+        <div class="about-header">About $Kirby</div>
+        <p class="about-content">
+            Kirby is one of the first meme coins on the BigPump platform.
+        </p>
+        <p class="about-content">
+            KIRBY is a cute and cheerful token inspired by the charm of a legendary character, designed to bring nostalgia and lift spirits. This project unites the community around kindness and positivity, offering a sense of lightheartedness and joy. KIRBY is a symbol of happiness in the TON world, reminding everyone that there’s always room for fun and simplicity.
+        </p>
+    </div>
+
+
+    <!-- Checklist Section -->
+    <div class="checklist-section">
+        <div class="checklist-header">Checklist</div>
+        <div class="checklist-content">
+            <div class="check-item">
+                <span class="check-icon">✔️</span>
+                <span>Launched on BigPump</span>
+            </div>
+            <div class="check-item">
+                <span class="check-icon">✔️</span>
+                <span>Listed on DexScreener</span>
+            </div>
+             <div class="check-item">
+                <span class="check-icon">✔️</span>
+                <span>Listed on Ston.fi</span>
+            </div>
+            <div class="check-item">
+                <span class="check-icon">✔️</span>
+                <span>Reached #2 on GeckoTerminal without promo</span>
+            </div>
+            <div class="check-item">
+                <span class="check-icon">✔️</span>
+                <span>Reached #11 on DexScreener without promo</span>
+            </div>
+            
+             <div class="check-item">
+                <span class="check-icon">✔️</span>
+                <span>$KIRBY website</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Roadmap Section -->
+    <div id="roadmap" class="roadmap-section">
+        <div class="roadmap-header">Roadmap</div>
+        <div class="roadmap-item">
+            <h4>Phase 1</h4>
+            <p>Reach 500 $KIRBY holders</p>
+        </div>
+        <div class="roadmap-item">
+            <h4>Phase 2</h4>
+            <p>Mention on the official PocketFi channel</p>
+        </div>
+        <div class="roadmap-item">
+            <h4>Phase 3</h4>
+            <p>$KIRBY  Mcap $500,000</p>
+        </div>
+        <div class="roadmap-item">
+            <h4>Phase 4</h4>
+            <p>Reach 2,500 $KIRBY holders</p>
+        </div>
+        <div class="roadmap-item">
+            <h4>Phase 5</h4>
+            <p>Market cap of $1,000,000</p>
+        </div>
+        <div class="roadmap-item">
+            <h4>Phase 6</h4>
+            <p>Participation in Memeland by TON Foundation</p>
+        </div>
+        <div class="roadmap-item">
+            <h4>Phase 7</h4>
+            <p>Listing on CEX</p>
+        </div>
+    </div>
+
+    <!-- Community Section -->
+    <div id="community" class="community-section">
+        <div class="community-header">Join Our Community</div>
+        <div class="community-icons">
+            
+            <a href="https://t.me/bigkirby" target="_blank">
+                <img src="tg.png" alt="Telegram" class="community-icon">
+            </a>
+            <a href="https://x.com/kirbytoncoin" target="_blank">
+                <img src="twitter-x.png" alt="Twitter" class="community-icon">
+            </a>
+            <a href="https://dexscreener.com/ton/eqc1esenahb881s6ngwztou4qlmuiy872_ig1vpb5ma6doqz" target="_blank">
+                <img src="favicon.png" alt="Dex scanner" class="community-icon">
+            </a>
+        </div>
+    </div>
+
+    <div class="bottom-nav">
+        <a href="#roadmap" class="nav-item">Roadmap</a>
+        <a href="#community" class="nav-item">Community</a>
+        <a href="info.html" class="nav-item">Token info</a>
+        <a href="#home" class="nav-item" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">Home</a>
+    </div>
+
+    <script>
+
+const translations = {
+        English: {
+            header: "$KIRBY MEME COIN",
+            description: "Legendary Kirby on Ton Blockchain!",
+            aboutHeader: "About $Kirby",
+            aboutContent1: "$Kirby is one of the first meme coins on the BigPump platform.",
+            aboutContent2: "$Kirby is a cute and cheerful token inspired by the charm of a legendary character, designed to bring nostalgia and lift spirits. This project unites the community around kindness and positivity, offering a sense of lightheartedness and joy. KIRBY is a symbol of happiness in the TON world, reminding everyone that there’s always room for fun and simplicity.",
+            checklist: [
+                "Launched on BigPump",
+                "Listed on DexScreener",
+                "Listed on Ston.fi",
+                "Reached #2 on GeckoTerminal without promo",
+                "Reached #11 on DexScreener without promo",
+                "$KIRBY website"
+            ],
+            roadmap: [
+            
+                { phase: "Phase 1", text: "Reach 500 $Kirby holders" },
+                { phase: "Phase 2", text: "Mention on the official PocketFi channel" },
+                { phase: "Phase 3", text: "$Kirby  Mcap $500,000" },
+                { phase: "Phase 4", text: "Reach 2,500 $Kirby holders" },
+                { phase: "Phase 5", text: "Market cap of $1,000,000" },
+                { phase: "Phase 6", text: "Participation in Memeland by TON Foundation" }, 
+                { phase: "Phase 7", text: "Listing on CEX" } 
+            ],
+            communityHeader: "Join Our Community",
+        },
+        Русский: {
+            header: "$KIRBY",
+            description: "Легендарный $Kirby на блокчейне Ton!",
+            aboutHeader: "О $Kirby",
+            aboutContent1: "$Kirby — одна из первых мем-монет на платформе BigPump.",
+            aboutContent2: "$Kirby — это милый и жизнерадостный токен, вдохновленный обаянием легендарного персонажа, призванный вызывать ностальгию и поднимать настроение. Этот проект объединяет сообщество вокруг доброты и позитива, даря ощущение беззаботности и радости. КИРБИ — символ счастья в мире TON, напоминающий всем, что всегда есть место веселью и простоте.",
+            checklist: [
+                "Запущено на BigPump",
+                "Включён в список на DexScreener",
+                "Включён в список на Ston.fi",
+                "Достигнут #2 на GeckoTerminal без рекламы",
+                "Достигнут #11 на DexScreener без рекламы",
+                "Сайт $KIRBY"
+
+            ],
+            roadmap: [
+                { phase: "Этап 1", text: "Достичь 500 держателей $Kirby" },
+                { phase: "Этап 2", text: "Упоминание на официальном канале PocketFi" },
+                { phase: "Этап 3", text: "$Kirby  Mcap $500,000" },
+                { phase: "Этап 4", text: "Достичь 2,500 держателей $KIRBY" },
+                { phase: "Этап 5", text: "$Kirby  Mcap $1,000,000" },
+                { phase: "Этап 6", text: "Участие в Memeland от TON Foundation" }, // Corrected comma
+                { phase: "Этап 7", text: "Листинг на бирже CEX" } // Corrected comma
+
+            ],
+
+            communityHeader: "Присоединяйтесь к нашему сообществу",
+        }
+    };
+
+    document.getElementById("languageToggle").addEventListener("click", function() {
+        // Get the current language
+        const currentLanguage = this.innerText;
+
+        // Determine the new language
+        const newLanguage = currentLanguage === "English" ? "Русский" : "English";
+
+        // Update button text
+        this.innerText = newLanguage;
+
+        // Update content based on the selected language
+        const langContent = translations[newLanguage];
+        
+        // Update main content
+        document.querySelector(".header").innerText = langContent.header;
+        document.querySelector(".description").innerText = langContent.description;
+        
+        // Update About Section
+        document.querySelector(".about-header").innerText = langContent.aboutHeader;
+        const aboutContents = document.querySelectorAll(".about-content");
+        aboutContents[0].innerText = langContent.aboutContent1;
+        aboutContents[1].innerText = langContent.aboutContent2;
+        
+        // Update Checklist Section
+        const checklistItems = document.querySelectorAll(".check-item span:nth-child(2)");
+        langContent.checklist.forEach((item, index) => {
+            checklistItems[index].innerText = item;
+        });
+
+        // Update Roadmap Section
+        const roadmapItems = document.querySelectorAll('.roadmap-item');
+        langContent.roadmap.forEach((roadmapItem, index) => {
+            roadmapItems[index].querySelector('h4').innerText = roadmapItem.phase;
+            roadmapItems[index].querySelector('p').innerText = roadmapItem.text;
+        });
+
+        // Update Community Section
+        document.querySelector(".community-header").innerText = langContent.communityHeader;
+    });
+
+        // Function to reveal roadmap items on scroll
+        const roadmapItems = document.querySelectorAll('.roadmap-item');
+        const communitySection = document.querySelector('.community-section');
+
+        function revealItems() {
+            const windowHeight = window.innerHeight;
+            roadmapItems.forEach(item => {
+                const itemTop = item.getBoundingClientRect().top;
+                if (itemTop < windowHeight) {
+                    item.classList.add('show');
+                }
+            });
+
+            const communityTop = communitySection.getBoundingClientRect().top;
+            if (communityTop < windowHeight) {
+                communitySection.classList.add('show');
+            }
+        }
+
+        window.addEventListener('scroll', revealItems);
+        window.addEventListener('load', revealItems);
+
+        
+    </script>
+</body>
+</html>
